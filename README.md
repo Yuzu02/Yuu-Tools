@@ -11,6 +11,14 @@ Yuu Tools is a CLI application that allows you to manage and run scripts in a si
 - Log system to track the execution of the scripts
 - More Features coming soon
 
+## Roadmap
+
+- Add more scripts
+- Refactor CLI Menus to handle more scripts
+- Refactor Config File to handle new scripts
+- Translate the CLI app to English
+- Log system to track the execution of the scripts
+
 ## Script -> Sort Files
 
 ## Features of the script
@@ -25,8 +33,6 @@ Yuu Tools is a CLI application that allows you to manage and run scripts in a si
 
 - Add more file/folder operations like copy, move, rename
 - Support additional file attributes to organize (size, date etc)
-
-## More scripts coming soon
 
 ## Installation
 
