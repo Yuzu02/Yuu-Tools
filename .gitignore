@@ -168,3 +168,4 @@ cython_debug/
 .vscode/settings.json
 .mypy_cache/
 .vscode/
+config.json
