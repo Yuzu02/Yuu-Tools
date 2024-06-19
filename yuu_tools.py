@@ -1,6 +1,8 @@
 
 """
-    Modulo para organizar los archivos descargados en carpetas específicas
+    #! Descripción Deprecated --- > Ahora la idea es expandir a mas scripts , no solo organizar archivos
+
+    Modulo para organizar los archivos en carpetas específicas
     según su extensión y categoría.
 
     El script se encarga de organizar los archivos descargados en carpetas
@@ -15,10 +17,8 @@ import os  # Para todo lo relacionado con el sistema operativo
 import re  # Para limpiar el path de los archivos
 import time  # Para medir tiempo de ejecución y dar tiempo al usuario para leer mensajes
 import shutil  # Para mover los archivos a las carpetas correspondientes
-from pathlib import \
-    Path  # Para trabajar con los objetos Path #* pip install pathlib
-from tkinter import \
-    filedialog  # Para seleccionar la carpeta donde se organizarán los archivos
+from pathlib import Path  # Para trabajar con los objetos Path
+from tkinter import filedialog # Para seleccionar la carpeta donde se organizarán los archivos
 from typing import Any, Dict, List, Tuple  # Type Hints
 import typer  # Para crear la interfaz de línea de comandos  #* pip install typer
 from rich import print as rprint  # Cool print statements #* pip install rich
@@ -273,22 +273,25 @@ def load_everything() -> Dict:
 
 
 def update_config(config: Dict) -> None:
-    """_summary_ Update the config file
+    """
+        Summary:
+            Update the configuration file with the new data from the script into the config.json file
 
-    Args:
-        config (_type_): Dict _description_ Config file
+        Args:
+            config (Dict): The configuration file to update
     """
     with open(CONFIG_FILE, 'w', encoding='utf-8') as file:
         json.dump(config, file, indent=4)
 
 
-def update_user_and_target_path(full_path: Path, config: Dict):
-    """_summary_ Update the User and target path
-       _description_ Check the OS (Windows or Linux)
-       and update the User and target path based on the OS
-    Args:
-        full_path (_type_): Patch _description_ Full path
-        config (_type_): Dict _description_ Config file
+def update_user_and_target_path(full_path: Path, config: Dict) -> None:
+    """
+        Summary:
+            Update the user and target path in the config file base on the full path input into the config.json file
+
+        Args:
+            full_path (Path): The full path input
+            config (Dict): The configuration file to update
     """
     if os.name == "posix":
         user_name = full_path.parts[-1]
@@ -301,10 +304,20 @@ def update_user_and_target_path(full_path: Path, config: Dict):
     config['TargetPath'] = target_path
 
 
-# * Extra functions
+# * Extra functions ( Not used in the script at the moment ) - Future implementation
 
 def change_theme(variant: int) -> None:
-    """Change the theme to match CRUD operations"""
+    """
+        Summary:
+            The idea is to change the theme of the script base on the variant selected by the user
+    
+        Args:
+            Variant (1) : Change the theme to green
+            Variant (2) : Change the theme to red
+
+        Future Implementation :
+            More themes to be added 
+    """
 
     if variant == 1:
         LINE_L.replace("blue", "green")
@@ -321,8 +334,14 @@ def clean_name(name):
     return clean_regex.sub("", name)
 
 
+# * User Experience Functions
+
 def clear_screen() -> None:
-    """clear en la terminal al cambiar de menu"""
+    """
+        Summary:
+            Clear the screen base on the OS (Windows or Linux) to give a better user experience 
+    
+    """
     # Validar el sistema operativo
     if os.name == 'posix':  # Linux
         os.system('clear')
