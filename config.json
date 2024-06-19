@@ -1,169 +1,203 @@
 {
-  "User": "Yuzu_",
-  "OS": "Windows",
-  "TargetPath": "Desktop",
-  "FullPath": "C:/Users/Yuzu_/Desktop",
-  "Log": "C:/Users/Yuzu_/Desktop/Log.txt",
-  "Paths": {
-    "Images": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Images",
-      "Extensions": ["JPG", "PNG", "GIF", "JPEG", "WEBP", "SVG", "ICO"],
-      "Subrutas": {
-        "JPG": "C:\\Users\\Yuzu_\\Desktop\\JPG",
-        "PNG": "C:\\Users\\Yuzu_\\Desktop\\PNG",
-        "GIF": "C:\\Users\\Yuzu_\\Desktop\\GIF",
-        "JPEG": "C:\\Users\\Yuzu_\\Desktop\\JPEG",
-        "WEBP": "C:\\Users\\Yuzu_\\Desktop\\WEBP",
-        "SVG": "C:\\Users\\Yuzu_\\Desktop\\SVG",
-        "ICO": "C:\\Users\\Yuzu_\\Desktop\\ICO"
-      }
+    "User": "Yuzu_",
+    "OS": "Windows",
+    "TargetPath": "Desktop",
+    "FullPath": "C:/Users/Yuzu_/Desktop",
+    "Log": "C:/Users/Yuzu_/Desktop/Log.txt",
+    "Paths": {
+        "Images": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Images",
+            "Extensions": [
+                "JPG",
+                "PNG",
+                "GIF",
+                "JPEG",
+                "WEBP",
+                "SVG",
+                "ICO"
+            ],
+            "Subrutas": {
+                "JPG": "C:\\Users\\Yuzu_\\Desktop\\Images\\JPG",
+                "PNG": "C:\\Users\\Yuzu_\\Desktop\\Images\\PNG",
+                "GIF": "C:\\Users\\Yuzu_\\Desktop\\Images\\GIF",
+                "JPEG": "C:\\Users\\Yuzu_\\Desktop\\Images\\JPEG",
+                "WEBP": "C:\\Users\\Yuzu_\\Desktop\\Images\\WEBP",
+                "SVG": "C:\\Users\\Yuzu_\\Desktop\\Images\\SVG",
+                "ICO": "C:\\Users\\Yuzu_\\Desktop\\Images\\ICO"
+            }
+        },
+        "Videos": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Videos",
+            "Extensions": [
+                "MP4",
+                "AVI",
+                "MKV",
+                "MOV"
+            ],
+            "Subrutas": {
+                "MP4": "C:\\Users\\Yuzu_\\Desktop\\Videos\\MP4",
+                "AVI": "C:\\Users\\Yuzu_\\Desktop\\Videos\\AVI",
+                "MKV": "C:\\Users\\Yuzu_\\Desktop\\Videos\\MKV",
+                "MOV": "C:\\Users\\Yuzu_\\Desktop\\Videos\\MOV"
+            }
+        },
+        "Documents": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Documents",
+            "Extensions": [
+                "PDF",
+                "DOCX",
+                "XLSX",
+                "TXT",
+                "CSV",
+                "PKT",
+                "MD ",
+                "LOG",
+                "JSON",
+                "YML",
+                "XML"
+            ],
+            "Subrutas": {
+                "PDF": "C:\\Users\\Yuzu_\\Desktop\\Documents\\PDF",
+                "DOCX": "C:\\Users\\Yuzu_\\Desktop\\Documents\\DOCX",
+                "XLSX": "C:\\Users\\Yuzu_\\Desktop\\Documents\\XLSX",
+                "TXT": "C:\\Users\\Yuzu_\\Desktop\\Documents\\TXT",
+                "CSV": "C:\\Users\\Yuzu_\\Desktop\\Documents\\CSV",
+                "PKT": "C:\\Users\\Yuzu_\\Desktop\\Documents\\PKT",
+                "MD": "C:\\Users\\Yuzu_\\Desktop\\Documents\\MD",
+                "LOG": "C:\\Users\\Yuzu_\\Desktop\\Documents\\LOG",
+                "JSON": "C:\\Users\\Yuzu_\\Desktop\\Documents\\JSON",
+                "YML": "C:\\Users\\Yuzu_\\Desktop\\Documents\\YML",
+                "XML": "C:\\Users\\Yuzu_\\Desktop\\Documents\\XML"
+            }
+        },
+        "Slides": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Slides",
+            "Extensions": [
+                "PPTX",
+                "PPT"
+            ],
+            "Subrutas": {
+                "PPTX": "C:\\Users\\Yuzu_\\Desktop\\Slides\\PPTX",
+                "PPT": "C:\\Users\\Yuzu_\\Desktop\\Slides\\PPT"
+            }
+        },
+        "Music": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Music",
+            "Extensions": [
+                "MP3",
+                "WAV"
+            ],
+            "Subrutas": {
+                "MP3": "C:\\Users\\Yuzu_\\Desktop\\Music\\MP3",
+                "WAV": "C:\\Users\\Yuzu_\\Desktop\\Music\\WAV",
+                "FLAC": "C:\\Users\\Yuzu_\\Desktop\\Music\\FLAC",
+                "M4A": "C:\\Users\\Yuzu_\\Desktop\\Music\\M4A",
+                "OGG": "C:\\Users\\Yuzu_\\Desktop\\Music\\OGG"
+            }
+        },
+        "Code": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Code",
+            "Extensions": [
+                "PY",
+                "JS",
+                "HTML",
+                "CSS",
+                "JAVA",
+                "C",
+                "CPP",
+                "CS",
+                "PHP",
+                "JL",
+                "SH",
+                "BAT",
+                "PS1",
+                "TS",
+                "JSX",
+                "TSX"
+            ],
+            "Subrutas": {
+                "PY": "C:\\Users\\Yuzu_\\Desktop\\Code\\PY",
+                "JS": "C:\\Users\\Yuzu_\\Desktop\\Code\\JS",
+                "HTML": "C:\\Users\\Yuzu_\\Desktop\\Code\\HTML",
+                "CSS": "C:\\Users\\Yuzu_\\Desktop\\Code\\CSS",
+                "JAVA": "C:\\Users\\Yuzu_\\Desktop\\Code\\JAVA",
+                "C": "C:\\Users\\Yuzu_\\Desktop\\Code\\C",
+                "CPP": "C:\\Users\\Yuzu_\\Desktop\\Code\\CPP",
+                "CS": "C:\\Users\\Yuzu_\\Desktop\\Code\\CS",
+                "PHP": "C:\\Users\\Yuzu_\\Desktop\\Code\\PHP",
+                "JL": "C:\\Users\\Yuzu_\\Desktop\\Code\\JL",
+                "SH": "C:\\Users\\Yuzu_\\Desktop\\Code\\SH",
+                "BAT": "C:\\Users\\Yuzu_\\Desktop\\Code\\BAT",
+                "PS1": "C:\\Users\\Yuzu_\\Desktop\\Code\\PS1",
+                "TS": "C:\\Users\\Yuzu_\\Desktop\\Code\\TS",
+                "JSX": "C:\\Users\\Yuzu_\\Desktop\\Code\\JSX",
+                "TSX": "C:\\Users\\Yuzu_\\Desktop\\Code\\TSX"
+            }
+        },
+        "APKs": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\APKs",
+            "Extensions": [
+                "APK",
+                "XAPK"
+            ],
+            "Subrutas": {
+                "XAPK": "C:\\Users\\Yuzu_\\Desktop\\APKs\\XAPK"
+            }
+        },
+        "ISO": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\ISO",
+            "Extensions": [
+                "ISO",
+                "IMG"
+            ],
+            "Subrutas": {
+                "IMG": "C:\\Users\\Yuzu_\\Desktop\\ISO\\IMG"
+            }
+        },
+        "Setups": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Setups",
+            "Extensions": [
+                "EXE",
+                "MSI",
+                "DMG"
+            ],
+            "Subrutas": {
+                "EXE": "C:\\Users\\Yuzu_\\Desktop\\Setups\\EXE",
+                "MSI": "C:\\Users\\Yuzu_\\Desktop\\Setups\\MSI",
+                "DMG": "C:\\Users\\Yuzu_\\Desktop\\Setups\\DMG"
+            }
+        },
+        "Zips_Rars": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Zips_Rars",
+            "Extensions": [
+                "ZIP",
+                "RAR",
+                "7Z"
+            ],
+            "Subrutas": {
+                "ZIP": "C:\\Users\\Yuzu_\\Desktop\\Zips_Rars\\ZIP",
+                "RAR": "C:\\Users\\Yuzu_\\Desktop\\Zips_Rars\\RAR",
+                "7Z": "C:\\Users\\Yuzu_\\Desktop\\Zips_Rars\\7Z"
+            }
+        },
+        "Torrents": {
+            "Path": "C:\\Users\\Yuzu_\\Desktop\\Torrents",
+            "Extensions": [
+                "TORRENT",
+                "MAGNET"
+            ],
+            "Subrutas": {
+                "Magnet": "C:\\Users\\Yuzu_\\Desktop\\Torrents\\Magnet"
+            }
+        }
     },
-    "Videos": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Videos",
-      "Extensions": ["MP4", "AVI", "MKV", "MOV"],
-      "Subrutas": {
-        "MP4": "C:\\Users\\Yuzu_\\Desktop\\MP4",
-        "AVI": "C:\\Users\\Yuzu_\\Desktop\\AVI",
-        "MKV": "C:\\Users\\Yuzu_\\Desktop\\MKV",
-        "MOV": "C:\\Users\\Yuzu_\\Desktop\\MOV"
-      }
-    },
-    "Documents": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Documents",
-      "Extensions": [
-        "PDF",
-        "DOCX",
-        "XLSX",
-        "TXT",
-        "CSV",
-        "PKT",
-        "MD ",
-        "LOG",
-        "JSON",
-        "YML",
-        "XML"
-      ],
-      "Subrutas": {
-        "PDF": "C:\\Users\\Yuzu_\\Desktop\\PDF",
-        "DOCX": "C:\\Users\\Yuzu_\\Desktop\\DOCX",
-        "XLSX": "C:\\Users\\Yuzu_\\Desktop\\XLSX",
-        "TXT": "C:\\Users\\Yuzu_\\Desktop\\TXT",
-        "CSV": "C:\\Users\\Yuzu_\\Desktop\\CSV",
-        "PKT": "C:\\Users\\Yuzu_\\Desktop\\PKT",
-        "MD": "C:\\Users\\Yuzu_\\Desktop\\MD",
-        "LOG": "C:\\Users\\Yuzu_\\Desktop\\LOG",
-        "JSON": "C:\\Users\\Yuzu_\\Desktop\\JSON",
-        "YML": "C:\\Users\\Yuzu_\\Desktop\\YML",
-        "XML": "C:\\Users\\Yuzu_\\Desktop\\XML"
-      }
-    },
-    "Slides": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Slides",
-      "Extensions": ["PPTX", "PPT"],
-      "Subrutas": {
-        "PPTX": "C:\\Users\\Yuzu_\\Desktop\\PPTX",
-        "PPT": "C:\\Users\\Yuzu_\\Desktop\\PPT"
-      }
-    },
-    "Music": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Music",
-      "Extensions": ["MP3", "WAV"],
-      "Subrutas": {
-        "MP3": "C:\\Users\\Yuzu_\\Desktop\\MP3",
-        "WAV": "C:\\Users\\Yuzu_\\Desktop\\WAV",
-        "FLAC": "C:\\Users\\Yuzu_\\Desktop\\FLAC",
-        "M4A": "C:\\Users\\Yuzu_\\Desktop\\M4A",
-        "OGG": "C:\\Users\\Yuzu_\\Desktop\\OGG"
-      }
-    },
-    "Code": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Code",
-      "Extensions": [
-        "PY",
-        "JS",
-        "HTML",
-        "CSS",
-        "JAVA",
-        "C",
-        "CPP",
-        "CS",
-        "PHP",
-        "JL",
-        "SH",
-        "BAT",
-        "PS1",
-        "TS",
-        "JSX",
-        "TSX"
-      ],
-      "Subrutas": {
-        "PY": "C:\\Users\\Yuzu_\\Desktop\\PY",
-        "JS": "C:\\Users\\Yuzu_\\Desktop\\JS",
-        "HTML": "C:\\Users\\Yuzu_\\Desktop\\HTML",
-        "CSS": "C:\\Users\\Yuzu_\\Desktop\\CSS",
-        "JAVA": "C:\\Users\\Yuzu_\\Desktop\\JAVA",
-        "C": "C:\\Users\\Yuzu_\\Desktop\\C",
-        "CPP": "C:\\Users\\Yuzu_\\Desktop\\CPP",
-        "CS": "C:\\Users\\Yuzu_\\Desktop\\CS",
-        "PHP": "C:\\Users\\Yuzu_\\Desktop\\PHP",
-        "JL": "C:\\Users\\Yuzu_\\Desktop\\JL",
-        "SH": "C:\\Users\\Yuzu_\\Desktop\\SH",
-        "BAT": "C:\\Users\\Yuzu_\\Desktop\\BAT",
-        "PS1": "C:\\Users\\Yuzu_\\Desktop\\PS1",
-        "TS": "C:\\Users\\Yuzu_\\Desktop\\TS",
-        "JSX": "C:\\Users\\Yuzu_\\Desktop\\JSX",
-        "TSX": "C:\\Users\\Yuzu_\\Desktop\\TSX"
-      }
-    },
-    "APKs": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\APKs",
-      "Extensions": ["APK", "XAPK"],
-      "Subrutas": {
-        "XAPK": "C:\\Users\\Yuzu_\\Desktop\\XAPK"
-      }
-    },
-    "ISO": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\ISO",
-      "Extensions": ["ISO", "IMG"],
-      "Subrutas": {
-        "IMG": "C:\\Users\\Yuzu_\\Desktop\\IMG"
-      }
-    },
-    "Setups": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Setups",
-      "Extensions": ["EXE", "MSI", "DMG"],
-      "Subrutas": {
-        "EXE": "C:\\Users\\Yuzu_\\Desktop\\EXE",
-        "MSI": "C:\\Users\\Yuzu_\\Desktop\\MSI",
-        "DMG": "C:\\Users\\Yuzu_\\Desktop\\DMG"
-      }
-    },
-    "Zips_Rars": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Zips_Rars",
-      "Extensions": ["ZIP", "RAR", "7Z"],
-      "Subrutas": {
-        "ZIP": "C:\\Users\\Yuzu_\\Desktop\\ZIP",
-        "RAR": "C:\\Users\\Yuzu_\\Desktop\\RAR",
-        "7Z": "C:\\Users\\Yuzu_\\Desktop\\7Z"
-      }
-    },
-    "Torrents": {
-      "Path": "C:\\Users\\Yuzu_\\Desktop\\Torrents",
-      "Extensions": ["TORRENT", "MAGNET"],
-      "Subrutas": {
-        "Magnet": "C:\\Users\\Yuzu_\\Desktop\\Magnet"
-      }
+    "Excepciones": {
+        "Telegram_Desktop": "C:Users/Yuzu_/Downloads/Telegram_Desktop",
+        "Sandbox": "C:/Users/Yuzu_/Downloads/Sandbox",
+        "Mods": "C:/Users/Yuzu_/Downloads/Mods",
+        "Video": "C:/Users/Yuzu_/Downloads/Video",
+        "Scripts": "C:/Users/Yuzu_/Downloads/Scripts",
+        "MyFlow": "C:/Users/Yuzu_/Downloads/MyFlow",
+        "Random": "C:/Users/Yuzu_/Downloads/Random"
     }
-  },
-  "Excepciones": {
-    "Telegram_Desktop": "C:Users/Yuzu_/Downloads/Telegram_Desktop",
-    "Sandbox": "C:/Users/Yuzu_/Downloads/Sandbox",
-    "Mods": "C:/Users/Yuzu_/Downloads/Mods",
-    "Video": "C:/Users/Yuzu_/Downloads/Video",
-    "Scripts": "C:/Users/Yuzu_/Downloads/Scripts",
-    "MyFlow": "C:/Users/Yuzu_/Downloads/MyFlow",
-    "Random": "C:/Users/Yuzu_/Downloads/Random",
-    "Images": "C:/Users/Yuzu_/Desktop/Otros/Images",
-    "No_Entrar": "C:/Users/Yuzu_/Desktop/No_Entrar"
-  }
 }

@@ -18,10 +18,11 @@ import re  # Para limpiar el path de los archivos
 import time  # Para medir tiempo de ejecución y dar tiempo al usuario para leer mensajes
 import shutil  # Para mover los archivos a las carpetas correspondientes
 from pathlib import Path  # Para trabajar con los objetos Path
-from tkinter import filedialog # Para seleccionar la carpeta donde se organizarán los archivos
+# Para seleccionar la carpeta donde se organizarán los archivos
+from tkinter import filedialog
 from typing import Any, Dict, List, Tuple  # Type Hints
 import typer  # Para crear la interfaz de línea de comandos  #* pip install typer
-from rich import print as rprint  # Cool print statements #* pip install rich
+from rich import print as rprint  # Cool rprint statements #* pip install rich
 from rich.table import Table  # Cool tables
 
 
@@ -48,9 +49,11 @@ SALIR: str = "[bold orange_red1]Salir[/bold orange_red1]"
 DESCRIPTION_TEXT: str = "Descripción"
 CANCELED_OPERATION: str = "[bold yellow]Operación cancelada[/bold yellow]"
 
-# * Output Aliases Extra
-# ENVOLVER_ARRIBA: str = "╭───────────────────────────────────────────────────────────────────────────────────╮"
-# ENVOLVER_ABAJO: str = "╰─────────────────────────────────────────────────────────────────────────────────────╯"
+# * Output Aliases Extra - Future Implementation
+# ENVOLVER_ARRIBA: str = "╭─────────────────────────────────────────────────────────────────────────────────────╮"
+# ENVOLVER_ABAJOO: str = "╰─────────────────────────────────────────────────────────────────────────────────────╯"
+
+# * Global Variables
 
 # Global variables - Config file
 CONFIG_FILE: str = "config.json"
@@ -77,10 +80,12 @@ target_path_str: str = ""
 carpetas_revisadas: List[str] = []
 archivos_a_organizar: List = []
 archivos_dentro_de_excepciones: List = []
-# test_path: str = "C:\\Program Files"
+
+# Global Testing variables
+# test_exception_path: str = "C:\\Program Files"
 
 
-# * Configuración del script
+# * Yuu Tools Setup
 
 
 def create_config() -> Dict:
@@ -269,7 +274,7 @@ def load_everything() -> Dict:
     return config
 
 
-# *Utilidades
+# *Utils Needed Functions for the script
 
 
 def update_config(config: Dict) -> None:
@@ -310,7 +315,7 @@ def change_theme(variant: int) -> None:
     """
         Summary:
             The idea is to change the theme of the script base on the variant selected by the user
-    
+
         Args:
             Variant (1) : Change the theme to green
             Variant (2) : Change the theme to red
@@ -328,8 +333,18 @@ def change_theme(variant: int) -> None:
         LINE_R.replace("blue", "red")
 
 
-def clean_name(name):
-    """Clean special characters and spaces from the name"""
+def clean_name(name) -> str:
+    """
+        Summary:
+            Clean the name of the file or folder to avoid any special characters or spaces using regex
+
+        Args:
+            name (str): The name of the file or folder to clean
+
+        Returns:
+            str: Returns the name cleaned
+    """
+
     clean_regex = re.compile(r"[^a-zA-Z0-9]")
     return clean_regex.sub("", name)
 
@@ -340,7 +355,7 @@ def clear_screen() -> None:
     """
         Summary:
             Clear the screen base on the OS (Windows or Linux) to give a better user experience 
-    
+
     """
     # Validar el sistema operativo
     if os.name == 'posix':  # Linux
@@ -351,10 +366,18 @@ def clear_screen() -> None:
 
 # * Display Info
 
-def user_info(variant: int):
-    """Display the user info
-        variant 1: Display the user info in a table and return to the main menu
-        variant 2: Display the user info in a table but don't return to the main menu
+def user_info(variant: int) -> str | None:
+    """
+        Summary:
+            Display the user info
+
+        Args:
+            variant 1: Display the user info in a table and return to the main menu
+            variant 2: Display the user info in a table but don't return to the main menu
+
+        Returns:
+            str : Returns the prompt to the main menu
+            None : Show the user info in a table but don't return to the main menu prompt
     """
     message = f"\n{ARROW_LINE_LEFT}Target Info{ARROW_LINE_RIGHT}\n"
     load_everything()
@@ -374,17 +397,27 @@ def user_info(variant: int):
         rprint(message)
         rprint(check_config)
 
+    return None
 
-def path_info(variant: int):
-    """ Display the path info base on the variant
-        variant 1: Display the paths in a table and return to the main menu
-        variant 2: Display the paths in a table but don't return to the main menu
+
+def path_info(variant: int) -> str | None:
+    """ 
+        Summary:
+            Display the path info base on the variant
+
+        Args:
+            variant 1: Display the paths in a table and return to the main menu
+            variant 2: Display the paths in a table but don't return to the main menu
+
+        Returns:
+            str : Returns the prompt to the main menu
+            None : Show the paths in a table but don't return to the main menu prompt
     """
     message = f"\n{ARROW_LINE_LEFT}Rutas{ARROW_LINE_RIGHT}\n"
     load_everything()
-    check_rutas = Table("Carpeta", "Path")
-    for folder, path in main_paths.items():
-        check_rutas.add_row(folder, str(Path(path)))
+    check_rutas = Table("Número", "Carpeta", "Path")
+    for i, (folder, path) in enumerate(main_paths.items(), start=1):
+        check_rutas.add_row(str(i), folder, str(Path(path)))
 
     if variant == 1:
         rprint(message)
@@ -396,17 +429,27 @@ def path_info(variant: int):
         rprint(message)
         rprint(check_rutas)
 
+    return None
 
-def exceptions_info(variant: int):
-    """ Display the exception info base on the variant
-        variant 1: Display the exceptions in a table and return to the main menu
-        variant 2: Display the exceptions in a table but don't return to the main menu
+
+def exceptions_info(variant: int) -> str | None:
+    """ 
+        Summary: 
+            Display the exception info base on the variant
+
+        Args:
+            variant 1: Display the exceptions in a table and return to the main menu
+            variant 2: Display the exceptions in a table but don't return to the main menu
+
+        Returns:
+            str : Returns the prompt to the main menu
+            None : Show the exceptions in a table but don't return to the main menu prompt
     """
     message = f"\n{ARROW_LINE_LEFT}Excepciones{ARROW_LINE_RIGHT}\n"
     load_everything()
-    check_excepciones = Table("Carpeta", "Path")
-    for excepcion, path_ex in config["Excepciones"].items():
-        check_excepciones.add_row(excepcion, str(Path(path_ex)))
+    check_excepciones = Table("Número", "Carpeta", "Path")
+    for i, (excepcion, path_ex) in enumerate(config["Excepciones"].items(), start=1):
+        check_excepciones.add_row(str(i), excepcion, str(Path(path_ex)))
 
     if variant == 1:
         rprint(message)
@@ -418,10 +461,21 @@ def exceptions_info(variant: int):
         rprint(message)
         rprint(check_excepciones)
 
+    return None
 
-def extensions_info(variant: int):
-    """ Display the extensions info base on the variant
-        variant 1: Display the extensions in a table
+
+def extensions_info(variant: int) -> str | None:
+    """ 
+        Summary:
+            Display the extensions info base on the variant
+
+        Args:
+            variant 1: Display the extensions in a table and return to the main menu
+            variant 2: Display the extensions in a table but don't return to the main menu
+
+        Returns:
+            str : Returns the prompt to the main menu
+            None : Show the extensions in a table but don't return to the main menu prompt
     """
     message = f"\n{ARROW_LINE_LEFT}Extensiones{ARROW_LINE_RIGHT}\n"
     load_everything()
@@ -440,21 +494,67 @@ def extensions_info(variant: int):
         rprint(message)
         rprint(check_extensiones)
 
+    return None
+
+
+def sub_paths_info(variant: int) -> str | None:
+    """ 
+        Summary:
+            Display the sub paths info base on the variant
+
+        Args:
+            variant 1: Display the sub paths in a table and return to the main menu
+            variant 2: Display the sub paths in a table but don't return to the main menu
+
+        Returns:
+            str : Returns the prompt to the main menu
+            None : Show the sub paths in a table but don't return to the main menu prompt
+    """
+    message = f"\n{ARROW_LINE_LEFT}Subrutas{ARROW_LINE_RIGHT}\n"
+    load_everything()
+    for category, info in config['Paths'].items():
+        check_sub_rutas = Table("Categoría", "Extensión", "Path")
+        for ext, path in info['Subrutas'].items():
+            check_sub_rutas.add_row(category, ext, path)
+        rprint(message)
+        rprint(check_sub_rutas)
+
+    if variant == 1:
+        rprint(message)
+        rprint(check_sub_rutas)
+        main_menu()
+        return __prompt_main__()
+
+    if variant == 2:
+        rprint(message)
+        rprint(check_sub_rutas)
+
+    return None
+
 
 def check() -> None:
-    """check every configuration and display it"""
+    """
+        Summary:
+            Check all the info in the script and display it in a tables one by one to the user
+    """
     user_info(2)
     path_info(2)
     exceptions_info(2)
-    extensions_info(1)
-    # ignore_file_info(2)
+    extensions_info(2)
+    sub_paths_info(1)
+    # ignore_file_info(2) - Future Implementation
 
 
 # * Manejo del script , las Rutas y extensiones a través de la CLI con los menús
 
 
-def main_menu():
-    """_summary_ Main menu that handles the entire script""
+def main_menu() -> str:
+    """
+        Summary:
+            Main menu to display the options to the user and handle the input
+
+        Returns:
+            str : Returns the prompt to the main menu
     """
     while True:
         rprint(f"\n{
@@ -464,7 +564,7 @@ def main_menu():
         main_menu_table.add_row("1", "Manejar Rutas")
         main_menu_table.add_row("2", "Manejar extensiones")
         main_menu_table.add_row("3", "Tabla de Rutas y extensiones")
-        main_menu_table.add_row("4", "Ejecutar script")
+        main_menu_table.add_row("4", "Ejecutar script")  # ?  Scripts
         main_menu_table.add_row("5", "Ver toda la configuración")
         main_menu_table.add_row("6", f"{SALIR}")
         rprint(main_menu_table)
@@ -473,7 +573,13 @@ def main_menu():
 
 
 def root_folder():
-    """Define where the files will be organized"""
+    """
+        Summary:
+            Define where the files will be organized and update the config file with the new path selected by the user
+
+        Returns:
+            str : Returns the prompt to the main menu
+    """
     rprint(f"{ARROW_LINE_LEFT}Target Folder{ARROW_LINE_RIGHT}\n")
     config = load_config()
     full_path = Path(config['FullPath'])
@@ -511,20 +617,33 @@ def root_folder():
         return __prompt_main__()
 
 
-def setup_menu():
-    """Setup the script"""
-    rprint(f"\n{ARROW_LINE_LEFT}Setup{ARROW_LINE_RIGHT}\n")
-    setup_menu_table = Table("Comando", f"{DESCRIPTION_TEXT}")
-    setup_menu_table.add_row("1", "Definir la carpeta objetivo")
-    setup_menu_table.add_row("2", f"{REGRESAR_MENU}")
-    setup_menu_table.add_row("3", f"{SALIR}")
-    rprint(setup_menu_table)
+def setup_menu() -> str:
+    """
+        Summary:
+            Setup Menu to display the setup options to the user  
 
-    _ = __prompt_setup_menu__()
+        Returns:
+            str : Returns the prompt to the main menu to handle the input        
+    """
+    while True:
+        rprint(f"\n{ARROW_LINE_LEFT}Setup{ARROW_LINE_RIGHT}\n")
+        setup_menu_table = Table("Comando", f"{DESCRIPTION_TEXT}")
+        setup_menu_table.add_row("1", "Definir la carpeta objetivo")
+        setup_menu_table.add_row("2", f"{REGRESAR_MENU}")
+        setup_menu_table.add_row("3", f"{SALIR}")
+        rprint(setup_menu_table)
+
+        _ = __prompt_setup_menu__()
 
 
-def paths():
-    """ Handle the paths"""
+def paths() -> str:
+    """
+        Summary:
+            Paths Menu to display the paths options to the user
+
+        Returns:
+            str : Returns the prompt to the main menu to handle the input
+    """
     while True:
         rprint(f"\n{ARROW_LINE_LEFT}Manejar Rutas{ARROW_LINE_RIGHT} \n")
         paths_menu_table = Table("Comando", f"{DESCRIPTION_TEXT}")
@@ -537,16 +656,21 @@ def paths():
         _ = __prompt_paths_menu__()
 
 
-def extensions():
-    """ Handle the extensions"""
+def extensions() -> str:
+    """ 
+        Summary:
+            Extensions Menu to display the extensions options to the user
+
+        Returns:
+            str : Returns the prompt to the main menu to handle the input
+    """
     while True:
         rprint(f"\n{ARROW_LINE_LEFT}Manejar extensiones{ARROW_LINE_RIGHT}\n")
         extensions_menu = Table("Comando", f"{DESCRIPTION_TEXT}")
         extensions_menu.add_row("0", "Ver todas las extensiones")
         extensions_menu.add_row(
             "1", "[bold green]Agregar extensión[/bold green]")
-        extensions_menu.add_row(
-            "2", "[bold red]Eliminar extensión[/bold red]")
+        extensions_menu.add_row("2", "[bold red]Eliminar extensión[/bold red]")
         extensions_menu.add_row("3", f"{REGRESAR_MENU}")
         extensions_menu.add_row("4", f"{SALIR}")
         rprint(extensions_menu)
@@ -554,8 +678,13 @@ def extensions():
         _ = __prompt_extensions_menu__()
 
 
-def add_path_menu():
-    """_summary_ Add a path to the config file
+def add_path_menu() -> str:
+    """
+        Summary:
+            Add Path Menu to display the options to the user to add a path
+
+        Returns:
+            str : Returns the prompt to the main menu to handle the input
     """
     while True:
         rprint(f"\n{ARROW_LINE_LEFT}Ingrese si desea agregar una ruta de excepción o una ruta de organización{
@@ -574,80 +703,165 @@ def add_path_menu():
         _ = __prompt_add_path_menu__()
 
 
+def del_path_menu() -> str:
+    """
+        Summary:
+            Delete Path Menu to display the options to the user to delete a path
+
+        Returns:
+            str : Returns the prompt to the main menu to handle the input
+    """
+    while True:
+        rprint(f"\n{ARROW_LINE_LEFT}Ingrese si desea eliminar una ruta de excepción o una ruta de organización{
+            ARROW_LINE_RIGHT}\n")
+        del_path_menu_table = Table("Comando", f"{DESCRIPTION_TEXT}")
+        del_path_menu_table.add_row(
+            "1", "[bold green]Ruta de excepción[/bold green]")
+        del_path_menu_table.add_row(
+            "2", "[bold blue]Ruta de organización[/bold blue]")
+        del_path_menu_table.add_row(
+            "3", "[bold red]Volver al menu anterior[/bold red]")
+        del_path_menu_table.add_row("4", f"{REGRESAR_MENU}")
+        del_path_menu_table.add_row("5", f"{SALIR}")
+        rprint(del_path_menu_table)
+
+        _ = __prompt_del_path_menu__()
+
+
 # * Manejo de preferencias
 
-def add_exception_path():
-    """_summary_ Add an exception path to the config file
+
+def add_exception_path() -> str:
+    """
+        Summary:
+            Add an exception path to the config file
+
+        Returns:
+            str : Returns the prompt to the main menu to handle the input
     """
     rprint(f"\n{
            ARROW_LINE_LEFT}[bold green]Agregar Ruta de Excepción[/bold green]{ARROW_LINE_RIGHT}")
     rprint("[bold blue_violet]   Una ruta de excepción evita que los archivos de esa carpeta se muevan  [/bold blue_violet]")
     config = load_config()
     exceptions_info(2)
+
+    # Seleccionar la carpeta de excepción
     rprint(f"{ARROW} Seleccione la nueva carpeta desde el explorador de archivos")
     path_except = filedialog.askdirectory()
+
+    if not path_except:
+        clear_screen()
+        rprint(
+            f"{ARROW} [bold yellow]No se ha seleccionado ninguna ruta[/bold yellow]")
+        add_path_menu()
+        return __prompt_add_path_menu__()
+
     exception_name = os.path.basename(path_except)
+
+    # Verificar si la ruta de excepción ya existe
     if path_except in config["Excepciones"].values():
         clear_screen()
         rprint(f"{ARROW} La ruta [bold yellow]'{
                path_except}'[/bold yellow] ya existe.")
         confirmar = typer.confirm(
-            f"{ARROW} ¿Desea actualizar la ruta de excepción? : ")
+            f"{ARROW} ¿Desea actualizar la ruta de excepción?")
+
+        # Actualizar la ruta de excepción
         if confirmar:
-            exception_name = os.path.basename(path_except)
             if exception_name in config["Excepciones"]:
-                rprint(f"{ARROW} El nombre de excepcion [bold yellow]'{
-                    exception_name}'[/bold yellow] ya existe.")
+                rprint(f"{ARROW} El nombre de excepción [bold yellow]'{
+                       exception_name}'[/bold yellow] ya existe.")
                 exception_name = typer.prompt(
-                    f"{ARROW} Ingrese un nuevo nombre para la excepción: ")
-                # Actualizar el nombre de la excepción
-                config["Excepciones"].pop(exception_name)
-                config["Excepciones"][exception_name] = path_except
-                update_config(config)
-                clear_screen()
-                rprint(f"{ARROW}Ruta de excepción [bold yellow]'{
-                       exception_name}'[/bold yellow] [bold green]actualizada.[/bold green]")
-                exceptions_info(1)
-                add_path_menu()
-                return __prompt_add_path_menu__()
-            else:
-                clear_screen()
-                rprint(
-                    f"{ARROW}{CANCELED_OPERATION}")
-                add_path_menu()
-                return __prompt_add_path_menu__()
-        else:
+                    f"{ARROW} Ingrese un nuevo nombre para la excepción:")
+
+            # Actualizar el nombre de la excepción
             config["Excepciones"][exception_name] = path_except
             update_config(config)
             clear_screen()
             rprint(f"{ARROW}Ruta de excepción [bold yellow]'{
                    exception_name}'[/bold yellow] [bold green]actualizada.[/bold green]")
             exceptions_info(1)
+        else:
+            clear_screen()
+            rprint(f"{ARROW}{CANCELED_OPERATION}")
             add_path_menu()
             return __prompt_add_path_menu__()
     else:
+        config["Excepciones"][exception_name] = path_except
+        update_config(config)
         clear_screen()
-        rprint(
-            f"{ARROW}{CANCELED_OPERATION}")
-        add_path_menu()
-        return __prompt_add_path_menu__()
-    if path_except == "":
-        clear_screen()
-        rprint(
-            f"{ARROW} [bold yellow]No se ha seleccionado ninguna ruta[/bold yellow]")
-        add_path_menu()
-        return __prompt_add_path_menu__()
-    config["Excepciones"][exception_name] = path_except
-    update_config(config)
+        rprint(f"{ARROW}Ruta de excepción [bold yellow]'{
+               exception_name}'[/bold yellow] [bold green]agregada.[/bold green]")
+        exceptions_info(1)
+
     clear_screen()
-    rprint(f"{ARROW}Ruta de excepción [bold yellow]'{
-           exception_name}'[/bold yellow] [bold green]agregada.[/bold green]")
-    exceptions_info(1)
+    add_path_menu()
     return __prompt_add_path_menu__()
 
 
-def add_path():
-    """_summary_ Add a path to the config file
+def remove_exception_path() -> str:
+    """
+        Summary:
+            Remove an exception path from the config file
+
+        Returns:
+            str : Returns the prompt to the main menu to handle the input
+    """
+    rprint(f"\n{
+           ARROW_LINE_LEFT}[bold red]Eliminar Ruta de Excepción[/bold red]{ARROW_LINE_RIGHT}")
+    rprint("[bold blue_violet] Eliminar una ruta de excepción permitirá que los archivos de esa carpeta se muevan [/bold blue_violet]")
+
+    config = load_config()
+    exceptions_info(2)
+
+    exception_names = list(config["Excepciones"].keys())
+    if not exception_names:
+        rprint(
+            f"{ARROW} [bold red]No hay rutas de excepción para eliminar.[/bold red]")
+        return __prompt_del_path_menu__()
+
+    option = typer.prompt(
+        f"{ARROW} Ingrese el número de la ruta de excepción a eliminar")
+
+    try:
+        option = int(option)
+        if option < 1 or option > len(exception_names):
+            raise ValueError
+    except ValueError:
+        clear_screen()
+        rprint(
+            f"{ARROW} [bold red]Opción inválida. Operación cancelada.[/bold red]")
+        return __prompt_del_path_menu__()
+
+    exception_name = exception_names[option - 1]
+
+    # Confirmar eliminación
+    confirm = typer.confirm(
+        f"{ARROW} ¿Está seguro que desea eliminar la ruta de excepción '{exception_name}'?")
+
+    if confirm:
+        path_except = config["Excepciones"].pop(exception_name)
+        update_config(config)
+        clear_screen()
+        rprint(f"{ARROW} Ruta de excepción [bold yellow]'{
+               exception_name}'[/bold yellow] [bold green]eliminada.[/bold green]")
+        exceptions_info(1)
+    else:
+        clear_screen()
+        rprint(f"{ARROW} Eliminación de ruta de excepción [bold yellow]'{
+               exception_name}'[/bold yellow] [bold red]cancelada.[/bold red]")
+
+    add_path_menu()
+    return __prompt_del_path_menu__()
+
+
+def add_path() -> str:
+    """
+        Summary:
+            Add a path to the config file
+
+        Returns:
+            str : Returns the prompt to the main menu to handle the input
     """
     rprint(
         f"\n{ARROW_LINE_LEFT}[bold green]Agregar Ruta[/bold green]{ARROW_LINE_RIGHT}")
@@ -683,8 +897,13 @@ def add_path():
         return __prompt_add_path_menu__()
 
 
-def remove_path():
-    """_summary_ Remove a path from the config file
+def remove_path() -> str:
+    """
+        Summary:
+            Remove a path from the config file and all the subpaths associated with it
+
+        Returns:
+            str : Returns the prompt to the del path menu menu to handle the input
     """
     rprint(
         f"\n{ARROW_LINE_LEFT}[bold red]Eliminar Ruta[/bold red]{ARROW_LINE_RIGHT}")
@@ -692,29 +911,43 @@ def remove_path():
         f"{ARROW}[bold yellow] Esto eliminará la ruta y todas las subrutas asociadas a ella.[/bold yellow]")
     config = load_config()
     path_info(2)
-    category = input(
-        f"{ARROW} Ingrese la categoría a eliminar (e.g., Images, Videos): ")
-    if category in config["Paths"]:
-        confirmar = typer.confirm(
-            f"{ARROW} ¿Está seguro de que desea eliminar la categoría '{category}'? : ")
-        if not confirmar:
-            clear_screen()
-            rprint(
-                f"{ARROW_LINE_LEFT}{CANCELED_OPERATION}{ARROW_LINE_RIGHT}")
-            paths()
-            return __prompt_paths_menu__()
 
-        if confirmar:
-            del config["Paths"][category]
-            update_config(config)
-            clear_screen()
-            rprint(f"{ARROW}Ruta de la categoría [bold purple]'{
-                   category}'[/bold purple] [bold orange_red1]eliminada.[/bold orange_red1]")
-            paths()
-            return __prompt_paths_menu__()
-    else:
-        rprint(f"{ARROW_LINE_RIGHT}La categoría [bold purple]'{
-               category}'[/bold purple] no existe.")
+    # Obtener las rutas y sus categorías
+    categories = list(config["Paths"].keys())
+    if not categories:
+        rprint(f"{ARROW} [bold red]No hay rutas para eliminar.[/bold red]")
+        return __prompt_paths_menu__()
+
+    option = typer.prompt(f"{ARROW} Ingrese el número de la ruta a eliminar")
+
+    try:
+        option = int(option)
+        if option < 1 or option > len(categories):
+            raise ValueError
+    except ValueError:
+        clear_screen()
+        rprint(
+            f"{ARROW} [bold red]Opción inválida. Operación cancelada.[/bold red]")
+        return __prompt_paths_menu__()
+
+    category = categories[option - 1]
+
+    confirmar = typer.confirm(
+        f"{ARROW} ¿Está seguro de que desea eliminar la categoría '{category}' y todas su rutas? : ")
+    if not confirmar:
+        clear_screen()
+        rprint(f"{ARROW_LINE_LEFT}{CANCELED_OPERATION}{ARROW_LINE_RIGHT}")
+        paths()
+        return __prompt_paths_menu__()
+
+    del config["Paths"][category]
+    update_config(config)
+    clear_screen()
+    rprint(f"{ARROW} Rutas de la categoría [bold purple]'{
+           category}'[/bold purple] [bold orange_red1]eliminadas.[/bold orange_red1]")
+
+    paths()
+    return __prompt_paths_menu__()
 
 
 def add_extension():
@@ -797,215 +1030,273 @@ def remove_extension():
 
 
 def update_paths_base_on_full_path(full_path_input, config: Dict) -> None:
-    """_summary_ Update the paths base on the full path input
+    """
+        Summary:
+            Update the paths base on the full path input by the user
 
-        description_ Update the paths and subpaths of every category
-    Args:
-        full_path_input (_type_): _description_
-        config (Dict): _description_
+        Args:
+            full_path_input (Path): The full path input by the user
+            config (Dict): The configuration file to update
     """
     full_path_input = str(full_path_input)
     for category, details in config["Paths"].items():
-        old_base_path = os.path.dirname(details["Path"])
-        details["Path"] = details["Path"].replace(
-            old_base_path, full_path_input)
+        # Actualizar la ruta de la categoría
+        details["Path"] = os.path.join(full_path_input, category)
         rprint(f"{ARROW} Nueva ruta para la categoría [bold yellow]{
                category}[/bold yellow] : [bold green]{details['Path']}[/bold green]")
-        for ext, subruta in details["Subrutas"].items():
-            old_base_path = os.path.dirname(subruta)
-            details["Subrutas"][ext] = subruta.replace(
-                old_base_path, full_path_input)
+
+        # Actualizar las subrutas dentro de la ruta de la categoría
+        for ext in details["Subrutas"]:
+            details["Subrutas"][ext] = os.path.join(details["Path"], ext)
             rprint(f"{ARROW} Nueva subruta para la categoría [bold purple]{
                    category}[/bold purple] y extensión [bold blue]{ext}[/bold blue] : [bold green]{details['Subrutas'][ext]}[/bold green]")
+
     update_config(config)
+
 
 # * Manejo del input de la CLI
 
 
 def __prompt_main__() -> str:
-    """_summary_ Main prompt menu management
-       _description_ Handle the main prompt menu using typer
-    Returns:
-        _type_: str _description_ Returns the prompt
+    """
+        Summary:
+            Main menu management
+            Handle the main menu using typer
+
+        Returns:
+            str : Returns the prompt to the main menu
     """
     prompt = typer.prompt(f"{ARROWLINE}")
     load_everything()
+    match prompt:
+        case "0":
+            clear_screen()
+            setup_menu()
+            return __prompt_main__()
 
-    if prompt == "0":
-        clear_screen()
-        setup_menu()
-        return __prompt_main__()
+        case "1":
+            clear_screen()
+            paths()
+            return __prompt_main__()
 
-    if prompt == "1":
-        clear_screen()
-        paths()
-        return __prompt_main__()
+        case "2":
+            clear_screen()
+            extensions()
+            return __prompt_main__()
 
-    if prompt == "2":
-        clear_screen()
-        extensions()
-        return __prompt_main__()
+        case "3":
+            clear_screen()
+            path_info(2)
+            extensions_info(1)
+            return __prompt_main__()
 
-    if prompt == "3":
-        clear_screen()
-        path_info(2)
-        extensions_info(1)
-        return __prompt_main__()
+        case "4":
+            clear_screen()
+            main()
+            return __prompt_main__()
 
-    if prompt == "4":
-        clear_screen()
-        main()
-        return __prompt_main__()
+        case "5":
+            clear_screen()
+            check()
+            return __prompt_main__()
 
-    elif prompt == "5":
-        clear_screen()
-        check()
-        return __prompt_main__()
+        case "6":
+            clear_screen()
+            typer.echo(EXIT)
+            raise typer.Abort()
 
-    elif prompt == "6":
-        clear_screen()
-        typer.echo(EXIT)
-        raise typer.Abort()
-
-    else:
-        typer.echo(DEFAULT_ERROR)
-        return __prompt_main__()
+        case _:
+            typer.echo(DEFAULT_ERROR)
+            return __prompt_main__()
 
 
 def __prompt_setup_menu__() -> str:
-    """_summary_ Setup menu management
-         _description_ Handle the setup menu using typer
-    Returns:
-        _type_: str _description_ Returns the prompt
+    """
+        Summary:
+            Setup menu management
+            Handle the setup menu using typer
+
+        Returns:
+            str : Returns the prompt to the main menu
     """
     prompt = typer.prompt(f"{ARROWLINE}")
+    match prompt:
+        case "1":
+            clear_screen()
+            root_folder()
+            return __prompt_setup_menu__()
 
-    if prompt == "1":
-        clear_screen()
-        root_folder()
-        return __prompt_setup_menu__()
+        case "2":
+            clear_screen()
+            main_menu()
+            return __prompt_main__()
 
-    elif prompt == "2":
-        clear_screen()
-        main_menu()
-        return __prompt_main__()
+        case "3":
+            clear_screen()
+            typer.echo(EXIT)
+            raise typer.Abort()
 
-    elif prompt == "3":
-        clear_screen()
-        typer.echo(EXIT)
-        raise typer.Abort()
-
-    else:
-        typer.echo(DEFAULT_ERROR)
-        return __prompt_setup_menu__()
+        case _:
+            typer.echo(DEFAULT_ERROR)
+            return __prompt_setup_menu__()
 
 
 def __prompt_paths_menu__() -> str:
-    """_summary_ Paths menu management
-       _description_ Handle the paths menu using typer
-    Returns:
-       _type_: str _description_ Returns the prompt
+    """
+        Summary:
+            Paths menu management
+            Handle the paths menu using typer
+
+        Returns:
+            str : Returns the prompt to the main menu
     """
     prompt = typer.prompt(f"{ARROWLINE}")
+    match prompt:
+        case "1":
+            clear_screen()
+            add_path_menu()
+            return __prompt_add_path_menu__()
 
-    if prompt == "1":
-        clear_screen()
-        add_path_menu()
-        return __prompt_add_path_menu__()
+        case "2":
+            clear_screen()
+            del_path_menu()
+            return __prompt_del_path_menu__()
 
-    if prompt == "2":
-        clear_screen()
-        remove_path()
-        return __prompt_paths_menu__()
+        case "3":
+            clear_screen()
+            main_menu()
+            return __prompt_main__()
 
-    if prompt == "3":
-        clear_screen()
-        main_menu()
-        return __prompt_main__()
+        case "4":
+            clear_screen()
+            typer.echo(EXIT)
+            raise typer.Abort()
 
-    if prompt == "4":
-        clear_screen()
-        typer.echo(EXIT)
-        raise typer.Abort()
-
-    else:
-        typer.echo(DEFAULT_ERROR)
-        return __prompt_paths_menu__()
+        case _:
+            typer.echo(DEFAULT_ERROR)
+            return __prompt_paths_menu__()
 
 
 def __prompt_add_path_menu__() -> str:
-    """_summary_ Add path menu management
-       _description_ Handle the add path menu using typer
-    Returns:
-        _type_: str _description_ Returns the prompt
+    """
+        Summary:
+            Add path menu management
+            Handle the add path menu using typer
+
+        Returns:
+            str : Returns the prompt to the main menu
     """
     prompt = typer.prompt(f"{ARROWLINE}")
+    match prompt:
+        case "1":
+            clear_screen()
+            add_exception_path()
+            return __prompt_add_path_menu__()
 
-    if prompt == "1":
-        clear_screen()
-        add_exception_path()
-        return __prompt_add_path_menu__()
+        case "2":
+            clear_screen()
+            add_path()
+            return __prompt_add_path_menu__()
 
-    if prompt == "2":
-        clear_screen()
-        add_path()
-        return __prompt_add_path_menu__()
+        case "3":
+            clear_screen()
+            paths()
+            return __prompt_paths_menu__()
 
-    if prompt == "3":
-        clear_screen()
-        paths()
-        return __prompt_paths_menu__()
+        case "4":
+            clear_screen()
+            main_menu()
+            return __prompt_main__()
 
-    if prompt == "4":
-        clear_screen()
-        main_menu()
-        return __prompt_main__()
+        case "5":
+            clear_screen()
+            typer.echo(EXIT)
+            raise typer.Abort()
 
-    if prompt == "5":
-        clear_screen()
-        typer.echo(EXIT)
-        raise typer.Abort()
+        case _:
+            typer.echo(DEFAULT_ERROR)
+            return __prompt_add_path_menu__()
 
-    else:
-        typer.echo(DEFAULT_ERROR)
-        return __prompt_add_path_menu__()
+
+def __prompt_del_path_menu__() -> str:
+    """
+        Summary:
+            Delete path menu management
+            Handle the delete path menu using typer
+
+        Returns:
+            str : Returns the prompt to the main menu
+    """
+    prompt = typer.prompt(f"{ARROWLINE}")
+    match prompt:
+        case "1":
+            clear_screen()
+            remove_exception_path()
+            return __prompt_del_path_menu__()
+
+        case "2":
+            clear_screen()
+            remove_path()
+            return __prompt_del_path_menu__()
+
+        case "3":
+            clear_screen()
+            paths()
+            return __prompt_paths_menu__()
+
+        case "4":
+            clear_screen()
+            main_menu()
+            return __prompt_main__()
+
+        case "5":
+            clear_screen()
+            typer.echo(EXIT)
+            raise typer.Abort()
+
+        case _:
+            typer.echo(DEFAULT_ERROR)
+            return __prompt_del_path_menu__()
 
 
 def __prompt_extensions_menu__() -> str:
-    """_summary_ Extensions menu management
-         _description_ Handle the extensions menu using typer
-    Returns:
-        _type_: str _description_ Returns the prompt
+    """
+        Summary:
+            Extensions menu management
+            Handle the extensions menu using typer
+
+        Returns:
+            str : Returns the prompt to the main menu
     """
     prompt = typer.prompt(f"{ARROWLINE}")
+    match prompt:
+        case "0":
+            extensions_info(1)
+            return __prompt_extensions_menu__()
 
-    if prompt == "0":
-        extensions_info(1)
-        return __prompt_extensions_menu__()
+        case "1":
+            clear_screen()
+            add_extension()
+            return __prompt_extensions_menu__()
 
-    if prompt == "1":
-        clear_screen()
-        add_extension()
-        return __prompt_extensions_menu__()
+        case "2":
+            clear_screen()
+            remove_extension()
+            return __prompt_extensions_menu__()
 
-    if prompt == "2":
-        clear_screen()
-        remove_extension()
-        return __prompt_extensions_menu__()
+        case "3":
+            clear_screen()
+            main_menu()
+            return __prompt_main__()
 
-    if prompt == "3":
-        clear_screen()
-        main_menu()
-        return __prompt_main__()
+        case "4":
+            clear_screen()
+            typer.echo(EXIT)
+            raise typer.Abort()
 
-    if prompt == "4":
-        clear_screen()
-        typer.echo(EXIT)
-        raise typer.Abort()
-
-    else:
-        typer.echo(DEFAULT_ERROR)
-        return __prompt_extensions_menu__()
+        case _:
+            typer.echo(DEFAULT_ERROR)
+            return __prompt_extensions_menu__()
 
 
 # * Script principal (Organizador de archivos)
@@ -1013,8 +1304,15 @@ def __prompt_extensions_menu__() -> str:
 
 def is_exception(path, exceptions) -> bool:
     """
-    Valida que la ruta no sea una excepción o una subcarpeta
-    que esté dentro de una carpeta excepción.
+        Summary:
+            Check if the path is an exception of is inside an exception folder
+
+        Args:
+            path (str): The path to check
+            exceptions (Dict[str, str]): The exceptions to check
+
+        Returns:
+            bool: Returns True if the path is an exception, False otherwise
     """
     # Normaliza la ruta a comprobar
     path = os.path.abspath(os.path.normpath(path))
@@ -1031,15 +1329,15 @@ def is_exception(path, exceptions) -> bool:
 
 def explorar_directorios(full_path: Path, exceptions: Dict[str, str]) -> Tuple[List[str], List[str]]:
     """
-    Explora los directorios y subdirectorios a partir de una ruta base,
-    y valida que no sean excepciones usando la función is_exception.
+        Summary:
+            Explore the directories and files to organize and check if they are exceptions or inside an exception folder
 
-    Args:
-        full_path (Path): La ruta base desde donde empezar a explorar.
-        exceptions (Dict[str, str]): Un diccionario con las excepciones que se le pasan a is_exception.
+        Args:
+            full_path (Path): La ruta base desde donde empezar a explorar.
+            exceptions (Dict[str, str]): Un diccionario con las excepciones que se le pasan a is_exception.
 
-    Returns:
-        Tuple[List[str], List[str]]: Una tupla con dos listas, la primera con rutas de archivos a organizar
+        Returns:
+            Tuple[List[str], List[str]]: Una tupla con dos listas, la primera con rutas de archivos a organizar
                                      y la segunda con rutas de archivos y directorios dentro de excepciones.
     """
     # Lista de archivos a organizar
@@ -1072,11 +1370,12 @@ def explorar_directorios(full_path: Path, exceptions: Dict[str, str]) -> Tuple[L
 
 def mover_archivos(archivos_a_organizar: List[str],  paths_dict: Dict) -> None:
     """
-    Mueve los archivos a organizar a sus respectivas carpetas.
+        Summary:
+            Mueve los archivos a organizar a sus respectivas carpetas.
 
-    Args:
-        archivos_a_organizar (List[str]): Una lista de rutas de archivos a organizar.
-        config (Dict): La configuración del script.
+        Args:
+            archivos_a_organizar (List[str]): Una lista de rutas de archivos a organizar.
+            config (Dict): La configuración del script.
     """
 
     for archivo in archivos_a_organizar:
@@ -1114,10 +1413,11 @@ def mover_archivos(archivos_a_organizar: List[str],  paths_dict: Dict) -> None:
 
 def del_empty_folders(carpetas_revisadas: List[str]) -> None:
     """
-    Elimina las carpetas vacías de una lista de carpetas.
+        Summary:
+            Elimina las carpetas vacías de una lista de carpetas.
 
-    Args:
-        carpetas (List[str]): Una lista de rutas de carpetas a verificar y eliminar si están vacías.
+        Args:
+            carpetas (List[str]): Una lista de rutas de carpetas a verificar y eliminar si están vacías.
     """
     for carpeta in carpetas_revisadas:
         try:
@@ -1173,8 +1473,17 @@ def run_main_script() -> str:
         exit()
 
 
+# * Entry Point
+
+
 def main() -> None:
-    """_summary_ Runs the script
+    """
+        Summary:
+            Entry point of the CLI App 
+
+        Future Implementation:
+            Add more script to run , so in the future the user can select which script to run and instead of running 
+            the main script it will run a function that controls the script to run based on the user input
     """
     run_main_script()
 
