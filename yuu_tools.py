@@ -173,7 +173,6 @@ def load_config() -> Dict:
                     f"{ARROW} Recuerde modificar las rutas desde este mismo script antes de empezar a organizar archivos")
                 rprint(f"\n{ARROW} Creando archivo de configuración...")
                 create_config()
-                time.sleep(10)
                 clear_screen()
                 rprint(
                     f"{ARROW} Archivo de configuración básico creado [bold green]exitosamente[/bold green]")
@@ -1392,7 +1391,6 @@ def mover_archivos(archivos_a_organizar: List[str],  paths_dict: Dict) -> None:
 
                 # Verificar si la ruta actual y la de destino son iguales
                 if archivo_path == destino_final:
-                    time.sleep(0.4)
                     rprint(f"{ARROW} Archivo [bold yellow]{
                            archivo}[/bold yellow] ya está en [bold green]{destino_final}[/bold green], no se mueve.")
                 else:
@@ -1400,7 +1398,6 @@ def mover_archivos(archivos_a_organizar: List[str],  paths_dict: Dict) -> None:
                     os.makedirs(destino_subcarpeta, exist_ok=True)
                     # Mover el archivo a la subcarpeta correspondiente
                     shutil.move(archivo, destino_final)
-                    time.sleep(0.4)
                     rprint(f"{ARROW} Archivo [bold yellow]{
                            archivo}[/bold yellow] movido a [bold green]{destino_final}[/bold green]")
                 archivo_movido = True
