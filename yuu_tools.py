@@ -1,6 +1,6 @@
-
 """
-    #! Descripción Deprecated --- > Ahora la idea es expandir a mas scripts , no solo organizar archivos
+    #! Descripción Deprecated --- > Ahora la idea es expandir a mas scripts \\
+    #? no solo organizar archivos
 
     Modulo para organizar los archivos en carpetas específicas
     según su extensión y categoría.
@@ -203,8 +203,10 @@ def load_data_from_config() -> tuple[dict[Any, Any], list[Any], dict[Any, Any], 
             Load the data from the config file into the script variables and dictionaries
 
         Returns:
-            tuple[dict[Any, Any], list[Any], dict[Any, Any], dict[Any, Any], dict[Any, Any], str, str, Path, Path, 
-            dict[Any, Any], str, str, dict[Any, Any]]: All the variables and dictionaries loaded from the config.json file in a tuple
+            tuple[dict[Any, Any], list[Any], dict[Any, Any], dict[Any, Any], \
+            dict[Any, Any], str, str, Path, Path, \
+            dict[Any, Any], str, str, dict[Any, Any]]: \
+            All the variables and dictionaries loaded from the config.json file in a tuple
     """
 
     global main_paths, all_extensions, paths_dict, sub_paths, extensions_by_category, \
@@ -279,7 +281,8 @@ def load_everything() -> Dict:
 def update_config(config: Dict) -> None:
     """
         Summary:
-            Update the configuration file with the new data from the script into the config.json file
+            Update the configuration file with the new data from the script \
+            into the config.json file
 
         Args:
             config (Dict): The configuration file to update
@@ -1329,15 +1332,19 @@ def is_exception(path, exceptions) -> bool:
 def explorar_directorios(full_path: Path, exceptions: Dict[str, str]) -> Tuple[List[str], List[str]]:
     """
         Summary:
-            Explore the directories and files to organize and check if they are exceptions or inside an exception folder
+            Explore the directories and files to organize and check \
+            if they are exceptions or inside an exception folder
 
         Args:
             full_path (Path): La ruta base desde donde empezar a explorar.
-            exceptions (Dict[str, str]): Un diccionario con las excepciones que se le pasan a is_exception.
+            exceptions (Dict[str, str]): Un diccionario con las excepciones \
+                que se le pasan a is_exception.
 
         Returns:
-            Tuple[List[str], List[str]]: Una tupla con dos listas, la primera con rutas de archivos a organizar
-                                     y la segunda con rutas de archivos y directorios dentro de excepciones.
+            Tuple[List[str], List[str]]: Una tupla con dos listas, \
+            la primera con rutas de archivos a organizar \
+            y la segunda con rutas de archivos y directorios \
+            dentro de excepciones.
     """
     # Lista de archivos a organizar
     global archivos_a_organizar, archivos_dentro_de_excepciones, carpetas_revisadas
@@ -1479,8 +1486,10 @@ def main() -> None:
             Entry point of the CLI App 
 
         Future Implementation:
-            Add more script to run , so in the future the user can select which script to run and instead of running 
-            the main script it will run a function that controls the script to run based on the user input
+            Add more script to run , so in the future the user can select \
+            which script to run and instead of running 
+            the main script it will run a function that controls \
+            the script to run based on the user input
     """
     run_main_script()
 
