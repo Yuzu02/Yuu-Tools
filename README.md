@@ -38,7 +38,7 @@ Yuu Tools is a CLI application that allows you to manage and run scripts in a si
 
 ```bash
     git clone https://github.com/Yuzu02/Yuu-Tools.git
-    cd organizador-de-archivos
+    cd Yuu-Tools
     pip install -r requirements.txt
 ```
 
