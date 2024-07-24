@@ -374,8 +374,8 @@ def user_info(variant: int) -> str | None:
             Display the user info
 
         Args:
-            variant 1: Display the user info in a table and return to the main menu
-            variant 2: Display the user info in a table but don't return to the main menu
+            variant 1 [int]: Display the user info in a table and return to the main menu
+            variant 2 [int]: Display the user info in a table but don't return to the main menu
 
         Returns:
             str : Returns the prompt to the main menu
